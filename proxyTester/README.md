@@ -28,7 +28,11 @@ If the port is not specified, the default port will be 80 (or whatever the defau
 The program will output the ip and the protocol of the proxy if it is working.
 The output will be in the following format:
 
-```<ip[:port]>;<protocol>``` inside a file called ```valid.txt```
+```<ip[:port]>;<protocol>;<latency>``` inside a file called ```valid.txt```.
+
+All the proxies that are not working will be ignored.
+
+The latencies are in milliseconds.
 
 The program currently supports the following protocols:
 - HTTP
