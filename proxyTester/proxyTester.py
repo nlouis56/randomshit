@@ -3,19 +3,19 @@ import sys
 from concurrent.futures import ThreadPoolExecutor
 
 def writeValid(ip, protocol, latency):
-    with open("valid.txt", "a") as f:
+    with open("valid.csv", "a") as f:
         f.write(f"{ip};{protocol};{latency}\n")
 
 
 def latencyTest(ip, protocol):
     try:
-        response = requests.get("https://www.google.com", proxies={protocol: ip}, timeout=2)
+        response = requests.get("208.67.222.222", proxies={protocol: ip}, timeout=2)
         if response.status_code == 200:
             return int(response.elapsed.microseconds / 1000)
         else:
             return -1
     except requests.exceptions.RequestException:
-        return -1
+        return -2
 
 
 def http_proxy(ip):
@@ -84,7 +84,7 @@ def launchWithFile(file):
         print("File not found.")
         sys.exit(1)
     print (f"File successfully parsed, checking {len(ips)} proxies...")
-    with ThreadPoolExecutor(max_workers=8) as executor:
+    with ThreadPoolExecutor(max_workers=128) as executor:
         for ip in ips:
             threads.append(executor.submit(checkProxy, ip))
         for thread in threads:
