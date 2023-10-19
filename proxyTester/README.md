@@ -37,8 +37,10 @@ The latencies are in milliseconds.
 The program currently supports the following protocols:
 - HTTP
 - HTTPS
-- SOCKS4
-- SOCKS5
+- ~~SOCKS4~~
+- ~~SOCKS5~~
+
+(the SOCKS protocols are not supported by the "requests" module)
 
 ## Requirements
 
